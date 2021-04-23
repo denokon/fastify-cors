@@ -175,12 +175,14 @@ function addPreflightHeaders (req, reply, corsOptions) {
 
 function resolveOriginWrapper (fastify, origin) {
   return function (req, cb) {
-    const result = origin.call(fastify, req.headers.origin, cb)
+    const result = origin.call(fastify, req.headers.origin, req, cb)
 
     // Allow for promises
     if (result && typeof result.then === 'function') {
       result.then(res => cb(null, res), cb)
-    }
+    } else {
+      cb(null, result);
+     }
   }
 }
 
