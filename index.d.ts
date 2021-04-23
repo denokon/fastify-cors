@@ -3,7 +3,7 @@
 import { FastifyInstance, FastifyPluginCallback, FastifyRequest } from 'fastify';
 
 type OriginCallback = (err: Error | null, allow: boolean) => void;
-export type OriginFunction = (origin: string, callback: OriginCallback) => void;
+export type OriginFunction = (origin: string, req: Request, callback: OriginCallback) => void;
 type OriginType = string | boolean | RegExp;
 type ValueOrArray<T> = T | ArrayOfValueOrArray<T>;
 
